@@ -1,0 +1,39 @@
+﻿@model Dept
+<head>
+	<style>
+		body{
+			font-family:'Segoe UI';
+		}
+	</style>
+</head>
+<h2>Edit View: Edit Dept</h2>
+<hr />
+@using(Html.BeginForm())
+{
+	<div>
+		<div>
+			@Html.LabelFor(d=>d.Id)
+			@Html.DisplayFor(d=>d.Id)
+		</div>
+
+		<div>
+			@Html.LabelFor(d=>d.Name)
+			@Html.EditorFor(d=>d.Name)
+			@Html.ValidationMessageFor(d=>d.Name,"",new {@style="color: red"})
+		</div>
+
+		<div>
+			@Html.LabelFor(d=>d.Loc)
+			@Html.EditorFor(d=>d.Loc)
+			@Html.ValidationMessageFor(d=>d.Loc,"",new {@style="color: red"})
+		</div>
+		<br><br>
+		<hr>
+		<input type="submit" value="Save">
+	</div>
+}
+<br /><br />
+@Html.ActionLink("Back to List","List")
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

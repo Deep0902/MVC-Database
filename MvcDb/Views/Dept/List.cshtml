@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MvcDb.Models.Dept>
+<style>
+	body{
+		font-family:'Segoe UI';
+	}
+	td, tr {
+		border: 1px solid;
+		text-align:center;
+		padding: 10px;
+	}
+</style>
+<h1>Department List View</h1>
+<hr />
+
+@Html.ActionLink("Add Department","Create")
+
+<br /><br />
+
+<table>
+	<thead>
+		<tr>
+			<td><b>@Html.DisplayNameFor(d=>d.Id)</b></td>
+			<td><b>@Html.DisplayNameFor(d=>d.Name)</b></td>
+			<td><b>@Html.DisplayNameFor(d=>d.Loc)</b></td>
+			<td><b>Options</b></td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var data in Model)
+		{
+			<tr>
+				<td>@data.Id</td>
+				<td>@data.Name</td>
+				<td>@data.Loc</td>
+				<td>
+					@Html.ActionLink("Details","Display",new {id = data.Id}) &nbsp;&nbsp;&nbsp;&nbsp;
+					@Html.ActionLink("Edit","Edit",new {id = data.Id}) &nbsp;&nbsp;&nbsp;&nbsp;
+					@Html.ActionLink("Delete","Delete",new {id = data.Id}) &nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
