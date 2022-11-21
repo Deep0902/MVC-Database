@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 using System.Linq;
-
+//repo class with methods
 public class DeptRepository : IDept
 {
     db1064Context context = new db1064Context();
