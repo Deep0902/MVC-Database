@@ -1,0 +1,63 @@
+﻿@model Emp
+<head>
+	<link href="~/css/stylesheet.css" rel="stylesheet" />
+	<style>
+		body {
+			font-family: 'Segoe UI';
+		}
+
+		div {
+			padding: 5px;
+			background-color: #c8d6e5;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>Edit Employee View</h2>
+	<form method="post">
+		<div>
+			<label asp-for="Id"></label><br />
+			<input type="text" asp-for="Id" readonly/><br /><br />
+
+			<label asp-for="Name"></label><br />
+			<input type="text" asp-for="Name" />
+			<span asp-validation-for="Name" style="color:#EA2027"></span>
+			<br /><br />
+
+			<label asp-for="Salary"></label><br />
+			<input type="text" asp-for="Salary" />
+			<span asp-validation-for="Salary" style="color:#EA2027"></span>
+			<br /><br />
+
+			<label>Select Department</label><br />
+			<select asp-for="Deptid" asp-items="ViewBag.Dept">
+				<option value="">Choose Department</option>
+			</select>
+			<br /><br />
+
+			<label asp-for="Email"></label><br />
+			<input type="email" asp-for="Email" />
+			<span asp-validation-for="Email" style="color:#EA2027"></span>
+			<br /><br />
+
+			<label asp-for="Dob"></label><br />
+			<input type="date" asp-for="Dob" />
+			<span asp-validation-for="Dob" style="color:#EA2027"></span>
+		</div>
+		<br /><br />
+		<input type="submit" value="Save" style="background-color:#2ec571">
+	</form>
+	<br />
+	<br />
+
+	<a asp-controller="Emp" asp-action="List">Back to List</a>
+
+	<br />
+	<br />
+
+	<div asp-validation-summary="All" style="color:#EA2027"></div>
+</body>
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

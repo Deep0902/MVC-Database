@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace MvcDb.Controllers
 {
@@ -34,6 +35,34 @@ namespace MvcDb.Controllers
             }
             ViewBag.Dept = new SelectList(db.Depts, "Id", "Name");
             return View(emp);
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var data = db.Emps.Find(id);
+            ViewBag.Deptid = new SelectList(db.Depts, "Id", "Name");
+            return View(data);
+        }
+        [HttpPost]
+        public IActionResult Edit(Emp emp)
+        {
+            if(ModelState.IsValid)
+            {
+                var oemp = db.Emps.Find(emp.Id);
+                oemp.Name = emp.Name;
+                oemp.Salary = emp.Salary;
+                oemp.Dob = emp.Dob;
+                oemp.Email = emp.Email;
+                db.SaveChanges();
+                return RedirectToAction("List");
+            }
+            ViewBag.Deptid = new SelectList(db.Depts, "Id", "Name");
+            return View(emp);
+        }
+        public IActionResult Display(int id)
+        {
+            var data = (from e in db.Emps.Include("Dept") where e.Id == id select e).FirstOrDefault();
+            return View(data);
         }
     }
 }

@@ -1,0 +1,35 @@
+﻿@model Emp
+<head>
+	<link href="~/css/stylesheet.css" rel="stylesheet" />
+	<style>
+		body {
+			font-family: 'Segoe UI';
+		}
+
+		td, tr {
+			border: 1px solid;
+			text-align: center;
+			padding: 10px;
+		}
+	</style>
+</head>
+<h2>Display View: Details Employee</h2>
+<hr />
+<table>
+	<thead>
+		<tr>
+			<td><b>@Html.DisplayNameFor(d=>d.Id)</b></td>
+			<td><b>@Html.DisplayNameFor(d=>d.Name)</b></td>
+			<td><b>@Html.DisplayNameFor(d=>d.Salary)</b></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>@Html.DisplayFor(d=>d.Id)</td>
+			<td>@Html.DisplayFor(d=>d.Name)</td>
+			<td>@Html.DisplayFor(d=>d.Salary)</td>
+		</tr>
+	</tbody>
+</table>
+<hr />
+<a asp-action="List" asp-controller="Emp">Back to List</a>
