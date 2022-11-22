@@ -27,6 +27,9 @@ namespace MvcDb.Models
         public string Email { get; set; }
 
         [Display(Name="Date of Birth")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DobCheck(ErrorMessage = "You're not 25")]
         public DateTime? Dob { get; set; }
 
         public virtual Dept Dept { get; set; }
