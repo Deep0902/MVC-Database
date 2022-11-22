@@ -6,6 +6,9 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using System;
+using System.Collections.Generic;
+using MvcDb.ViewModel;
 
 namespace MvcDb.Controllers
 {
@@ -14,7 +17,16 @@ namespace MvcDb.Controllers
         db1064Context db = new db1064Context();
         public IActionResult List()
         {
-            var data = db.Emps.Include("Dept").ToList();
+            List<Emp> data;
+            try
+            {
+                data = db.Emps.Include("Dept").ToList();
+            }
+            catch(Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View("Error");
+            }
             return View(data);
         }
 
@@ -63,6 +75,37 @@ namespace MvcDb.Controllers
         {
             var data = (from e in db.Emps.Include("Dept") where e.Id == id select e).FirstOrDefault();
             return View(data);
+        }
+
+        public IActionResult ShowBonus()
+        {
+            List<Emp> emps = db.Emps.ToList();
+            List<EmpDeptVm> empDeptVms = new List<EmpDeptVm>();
+            foreach(var data in emps)
+            {
+                EmpDeptVm vm = new EmpDeptVm();
+                vm.Id = data.Id;
+                vm.Name = data.Name;
+                vm.Salary = data.Salary;
+                vm.DeptName = data.Dept.Name;
+                vm.Location = data.Dept.Loc;
+                if(vm.Salary >= 70)
+                {
+                    vm.Bonus = 7000;
+                    vm.Color = "yellow";
+                }
+                else if(vm.Salary>=40000)
+                {
+                    vm.Bonus = 4000;
+                    vm.Color = "cyan";
+                }
+                else
+                {
+                    vm.Bonus = 2000;
+                    vm.Color = "lime";
+                }
+            }
+            return View(empDeptVms);
         }
     }
 }

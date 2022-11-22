@@ -38,6 +38,10 @@ namespace MvcDb
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+            }
             app.UseStaticFiles();
             app.UseRouting();
             app.UseMvc(routes =>
