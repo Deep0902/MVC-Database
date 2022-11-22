@@ -79,7 +79,7 @@ namespace MvcDb.Controllers
 
         public IActionResult ShowBonus()
         {
-            List<Emp> emps = db.Emps.ToList();
+            List<Emp> emps = db.Emps.Include("Dept").ToList(); //we've to include dept so we get dept details
             List<EmpDeptVm> empDeptVms = new List<EmpDeptVm>();
             foreach(var data in emps)
             {
@@ -89,7 +89,7 @@ namespace MvcDb.Controllers
                 vm.Salary = data.Salary;
                 vm.DeptName = data.Dept.Name;
                 vm.Location = data.Dept.Loc;
-                if(vm.Salary >= 70)
+                if(vm.Salary >= 70000)
                 {
                     vm.Bonus = 7000;
                     vm.Color = "yellow";
@@ -104,6 +104,7 @@ namespace MvcDb.Controllers
                     vm.Bonus = 2000;
                     vm.Color = "lime";
                 }
+                empDeptVms.Add(vm);
             }
             return View(empDeptVms);
         }

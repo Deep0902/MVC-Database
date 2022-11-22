@@ -1,11 +1,62 @@
-﻿@model Emp
+﻿@model IEnumerable<MvcDb.ViewModel.EmpDeptVm>
 <head>
 	<link href="~/css/stylesheet.css" rel="stylesheet" />
 	<style>
 		body{
 			font-family:'Segoe UI';
 		}
+		td, th {
+		border: 1px solid;
+		text-align:center;
+		padding: 10px;
+	}
+	div{
+		margin:5px;
+		border-raduis:5px;
+	}
 	</style>
 </head>
 
 <body>
+	<h2>ShowBonus View</h2>
+	@*@foreach(var data in Model)
+	{
+
+		<div style="border:solid 5px #343434;width:300px; background-color:@data.Color">
+			Id: @data.Id<br>
+			Name: @data.Name<br>
+			Salary: @data.Salary<br>
+			Bonus: @data.Bonus <br>
+			Department: @data.DeptName<br>
+			Location: @data.Location<br>
+		</div>
+	}*@
+
+
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Salary</th>
+				<th>Bonus</th>
+				<th>Department</th>
+				<th>Location</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var data in Model)
+			{
+				<tr style="background-color:@data.Color">
+					<td>@data.Id</td>
+					<td>@data.Name</td>
+					<td>@data.Salary</td>
+					<td>@data.Bonus</td>
+					<td>@data.DeptName</td>
+					<td>@data.Location</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+</body>
